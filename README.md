@@ -1,6 +1,7 @@
 ## DEV
 - Clone the repo
 - Create a ```.env``` like the example in ```.env.template```
+- Run ```git submodule update --init --recursive``` to rebuild submodules of git
 - Run ```docker compose up --build```
 
 ## SubModules of Git
