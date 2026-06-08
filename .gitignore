@@ -1,2 +1,5 @@
 /note_modules
 .env
+
+# OS
+.DS_Store
