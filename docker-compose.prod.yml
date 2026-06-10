@@ -6,7 +6,7 @@ services:
     build:
       context: ./client-gateway #path where can find the dockerfile.prod
       dockerfile: dockerfile.prod
-    image: client-gateway-prod #this is the name of image when is released
+    image: europe-southwest1-docker.pkg.dev/product-launcher-498816/image-registry/client-gateway #this is the name of image when is released
     ports:
       - ${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}
     environment:
@@ -19,7 +19,7 @@ services:
       dockerfile: dockerfile.prod
       args:
         DATABASE_URL: ${DATABASE_URL}
-    image: auth-ms-prod
+    image: europe-southwest1-docker.pkg.dev/product-launcher-498816/image-registry/auth-ms
     environment:
       - PORT=3004
       - NATS_SERVERS=nats://nats-server:4222
@@ -30,7 +30,7 @@ services:
     build:
       context: ./product-ms
       dockerfile: dockerfile.prod
-    image: product-ms
+    image: europe-southwest1-docker.pkg.dev/product-launcher-498816/image-registry/product-ms
     environment:
       - PORT=3001
       - NATS_SERVERS=nats://nats-server:4222
@@ -42,24 +42,11 @@ services:
       dockerfile: dockerfile.prod
       args:
         ORDERS_DATABASE_URL: ${ORDERS_DATABASE_URL}
-    image: orders-ms
+    image: europe-southwest1-docker.pkg.dev/product-launcher-498816/image-registry/orders-ms
     environment:
       - PORT=3002
       - DATABASE_URL=${ORDERS_DATABASE_URL}
       - NATS_SERVERS=nats://nats-server:4222
-
-#   orders-db:
-#     container_name: orders-database
-#     image: postgres:16.2
-#     restart: unless-stopped
-#     volumes:
-#       - ./orders-ms/postgres:/var/lib/postgresql/data
-#     ports:
-#       - 5432:5432
-#     environment:
-#       - POSTGRES_USER=postgres
-#       - POSTGRES_PASSWORD=123456
-#       - POSTGRES_DB=ordersdb
 
 # ==============================================================
 # Payments-ms
@@ -69,6 +56,7 @@ services:
     build:
       context: payments-ms
       dockerfile: dockerfile.prod
+    image: europe-southwest1-docker.pkg.dev/product-launcher-498816/image-registry/payments-ms
     ports:
       - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
     environment:
@@ -81,3 +69,4 @@ services:
 
 # # Al crear la imagen se crean dns automaticos y tienen el nombre del servicio
 # # por eso cambia el localhost port nats-server
+## falta hacer el push a GCP
