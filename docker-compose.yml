@@ -24,7 +24,7 @@ services:
     environment:
       - PORT=3004
       - NATS_SERVERS=nats://nats-server:4222
-      - DATABASE_URL=${AUTH_MONGODB_URL}
+      - DATABASE_URL=${DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET_AUTH_MS}
 
   product-ms:
